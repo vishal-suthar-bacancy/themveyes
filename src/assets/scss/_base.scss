@@ -1,0 +1,163 @@
+html{
+    @media all and (max-width:1440px){
+         font-size: 80%;
+    }
+}
+body{
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+   
+}
+.bg-light{
+    background:$bgLight !important;
+}
+.bg-primary{
+    background:$PrimaryColor !important;
+}
+.bg-none{
+    background: none !important;
+}
+.text-primary{
+    color:$PrimaryColor !important;
+}
+.btn{
+    padding: 0.75rem 1.875rem !important;
+    border-radius: 3.125rem;
+    outline: none !important;
+    box-shadow: none !important;
+    &.btn-primary{
+        background: $PrimaryColor !important;
+        color:$WhiteColor !important;
+        border:0.125rem solid  $PrimaryColor !important;
+    }
+    &.btn-outline-secondary{
+        background: transparent !important;
+        color:$WhiteColor !important;
+        border:0.125rem solid  $WhiteColor !important;
+    }
+    &.btn-outline-primary{
+        background: transparent !important;
+        color:$PrimaryColor !important;
+        border:0.125rem solid  $PrimaryColor !important;
+    }
+    &.btn-none{
+        background: transparent !important;
+        color:$PrimaryColor;
+        border:none !important;
+    }
+    &.btn-toggle{
+        padding: 0rem !important;
+        display: inline-block;
+    }
+    &.rounded{
+      border-radius:0.625rem !important;
+    }
+    &.table-btn{
+        padding: 0.125rem !important
+    }
+    &.btn-sm{
+        padding: 0.438rem 1.625rem !important;
+        min-height: auto;
+    }
+    &.btn-text-danger{
+        color: $DangerColor !important;
+        padding: 0.5rem 0.938rem !important
+        
+    }
+}
+.heading-main{
+    @include rem-font(72px,100px);
+}
+.target-Scroll{
+    position: relative;
+    top: -100px; 
+    visibility: hidden;
+}
+// .heading3{
+//     @include rem-font(32px,100px);
+// }
+.heading3{
+    @include rem-font(32px,40px);
+}
+.heading4{
+    @include rem-font(24px,42px);
+    font-weight: 600;
+}
+
+.heading5{
+    @include rem-font(18px,42px);
+    font-weight: 600;
+}
+.heading6{
+    @include rem-font(16px,28px);
+    font-weight: 600;
+}
+.font-weight-bold{
+    font-weight: 700;
+}
+.label-text{
+    @include rem-font(18px,28px);
+}
+
+
+@media all and (min-width:1600px){
+    .container{
+        max-width: 1600px;
+    }
+}
+
+.customCheckBox{
+    position: relative;
+    cursor: pointer;
+        padding: 0.313rem 0rem 0.313rem 2.5rem;
+        input{
+            position: absolute;
+            width: 0rem;
+            height: 0rem; 
+            & + label{
+                color:$PrimaryColor;
+                &:after{
+                    content: "";
+                    width: 1.875rem;
+                    height: 1.875rem;
+                    border:0.125rem solid $PrimaryColor ;
+                    background:$white ;
+                    transition: 0.3s linear;
+                    cursor: pointer;
+                    display: block;
+                    position: absolute;
+                    left: 0rem;
+                    top: 0rem;
+                    @include border-radius(0.313rem);
+                }
+                &:before{
+                    border-left: 0.125rem solid $white;
+                    border-bottom: 0.125rem solid $white;
+                    content: "";
+                    position: absolute;
+                    left: 0.438rem;
+                    top: 0.563rem;
+                    width: 0.938rem;
+                    height: 0.5rem;
+                    transform: rotate(-40deg);
+                    opacity: 0;
+                    transition: 0.3s linear;
+                    cursor: pointer;
+                    z-index: 2;
+                }
+            }
+            &:checked {
+                & + label{
+                    &::after{
+                        transition: 0.3s linear;
+                        background:$PrimaryColor ;
+                    }
+                    &:before{
+                        opacity: 1;
+                        transition: 0.3s linear;
+                    }
+                
+            }
+        }
+    }
+}

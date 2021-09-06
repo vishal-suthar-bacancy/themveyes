@@ -1,0 +1,156 @@
+@mixin rem($property, $px-values) {
+    // Convert the baseline into rems
+    $baseline-rem: $rem-baseline-px / 1rem * 1;
+
+    // Print the first line in pixel values
+    @if $rem-include-px{
+        #{$property}: $px-values;
+    }
+
+    // If there is only one (numeric) value, return the property/value line for it.
+    @if type-of($px-values) == "number" {
+        #{$property}: $px-values / $baseline-rem;
+    }
+    @else {
+        // Create an empty list that we can dump values into
+        $rem-values: ();
+        @each $value in $px-values {
+            // If the value is zero or not a number, return it
+            @if $value == 0 or type-of( $value ) != "number" {
+                $rem-values: append($rem-values, $value);
+            }
+            @else {
+                $rem-values: append($rem-values, $value / $baseline-rem);
+            }
+        }
+
+        // Return the property and its list of converted values
+        #{$property}: $rem-values;
+    }
+}
+
+@mixin rem-font($font-size-px, $line-height-px:false){
+    @include rem('font-size', $font-size-px);
+    @if $line-height-px{
+        @include rem('line-height', $line-height-px);
+    }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  -o-border-radius: $radius;
+  border-radius: $radius;
+}
+@mixin border-radius-top-left($radius) {
+  -webkit-border-top-left-radius: $radius;
+  -moz-border-radius-topleft: $radius;
+  -ms-border-top-left-radius: $radius;
+  -o-border-top-left-radius: $radius;
+  border-top-left-radius: $radius;
+}
+@mixin border-radius-top-right($radius) {
+  -webkit-border-top-right-radius: $radius;
+  -moz-border-radius-topright: $radius;
+  -ms-border-top-right-radius: $radius;
+  -o-border-top-right-radius: $radius;
+  border-top-right-radius: $radius;
+}
+@mixin border-radius-bottom-left($radius) {
+  -webkit-border-bottom-left-radius: $radius;
+  -moz-border-radius-bottomleft: $radius;
+  -ms-border-bottom-left-radius: $radius;
+  -o-border-bottom-left-radius: $radius;
+  border-bottom-left-radius: $radius;
+}
+@mixin border-radius-bottom-right($radius) {
+  -webkit-border-bottom-right-radius: $radius;
+  -moz-border-radius-bottomright: $radius;
+  -ms-border-bottom-right-radius: $radius;
+  -o-border-bottom-right-radius: $radius;
+  border-bottom-right-radius: $radius;
+}
+
+
+
+@mixin opacity($opacity) {
+	zoom: 1;
+	filter: alpha(opacity=($opacity*100));
+	opacity: $opacity;
+}
+
+@mixin non-selectable() {
+	-webkit-user-select: none;  
+	-moz-user-select: none;    
+	-ms-user-select: none;      
+	user-select: none;
+}
+
+@mixin ellipsis() {
+	white-space: nowrap;
+	overflow: hidden;
+	-ms-text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+}
+
+
+@mixin border-box{
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+
+@mixin box-shadow($params) {
+  -webkit-box-shadow: $params;
+  -moz-box-shadow: $params;
+  box-shadow: $params;
+}
+   
+
+   
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+
+
+
+// custom scroll bar mixin
+@mixin scrollbars($size, $foreground-color, $background-color: mix($foreground-color, white,  0%)) {
+  // For Google Chrome
+  
+  overflow:hidden;
+  &:hover{
+    overflow:auto;
+  }
+  &::-webkit-scrollbar {
+    width:  $size;
+    height: $size;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $foreground-color;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $background-color;
+  }
+
+  // For Internet Explorer
+  & {
+    scrollbar-face-color: $foreground-color;
+    scrollbar-track-color: $background-color;
+  }
+
+  @media all and (max-width:1024px){
+    overflow:visible;
+    &:hover{
+      overflow:visible;
+    }
+  }
+}
